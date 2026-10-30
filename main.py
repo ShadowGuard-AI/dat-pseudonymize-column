@@ -111,12 +111,4 @@ def main():
     print("Data pseudonymization completed successfully.")
 
 if __name__ == "__main__":
-    # Example usage
-    # python main.py input.csv output.csv sensitive_column --locale fr_FR --seed 42
-
-    # Create a dummy input.csv for demonstration
-    # echo "name,age,city" > input.csv
-    # echo "Alice,30,New York" >> input.csv
-    # echo "Bob,25,London" >> input.csv
-
     main()
