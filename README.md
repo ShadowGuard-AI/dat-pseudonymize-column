@@ -1,3 +1,5 @@
+![Banner](banner.png)
+
 # dat-Pseudonymize-Column
 Replaces values in a specified column of a CSV file with randomly generated pseudonyms, preserving data type and format using the faker library. - Focused on Tools for obfuscating or masking sensitive data in datasets, databases, and logs while preserving statistical properties for testing and analysis. Uses Faker for generating synthetic data and scikit-learn for basic statistical analysis and masking techniques.
 
