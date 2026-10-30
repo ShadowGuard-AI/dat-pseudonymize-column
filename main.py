@@ -38,28 +38,32 @@ def pseudonymize_column(input_file, output_file, column_name, locale='en_US', se
     try:
         # Initialize Faker with locale and seed
         fake = Faker(locale)
-        if seed:
+        # seed 0 is a real seed a caller may pass for a reproducible run, so
+        # test for None here rather than truthiness.
+        if seed is not None:
             Faker.seed(seed)
 
-        # Open input and output CSV files
-        with open(input_file, 'r', newline='') as infile, \
-             open(output_file, 'w', newline='') as outfile:
-
+        # The header is read and the column is checked before the output
+        # file is opened. Opening the output first left a header-only file
+        # behind on a bad column name, which looks like a successful run
+        # with one row instead of the failure it was.
+        with open(input_file, 'r', newline='') as infile:
             reader = csv.reader(infile)
-            writer = csv.writer(outfile)
-
-            # Read header row
-            header = next(reader)
-            writer.writerow(header)
-
-            # Find the column index
+            header = next(reader, None)
+            if header is None:
+                raise ValueError("Input CSV file is empty, no header row found.")
             try:
                 column_index = header.index(column_name)
             except ValueError:
                 raise ValueError(f"Column '{column_name}' not found in the CSV file.")
+            rows = list(reader)
+
+        with open(output_file, 'w', newline='') as outfile:
+            writer = csv.writer(outfile)
+            writer.writerow(header)
 
             # Process each row
-            for row in reader:
+            for row in rows:
                 # Pseudonymize the specified column
                 try:
                     original_value = row[column_index]
