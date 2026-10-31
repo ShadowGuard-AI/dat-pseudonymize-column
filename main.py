@@ -1,6 +1,7 @@
 import argparse
 import csv
 import logging
+import re
 import sys
 from faker import Faker
 
@@ -18,6 +19,64 @@ def setup_argparse():
     parser.add_argument('--locale', default='en_US', help='Locale for Faker (default: en_US).')
     parser.add_argument('--seed', type=int, help='Seed for Faker\'s random number generator for reproducibility.')
     return parser
+
+_INT_RE = re.compile(r'^[+-]?\d+$')
+_FLOAT_RE = re.compile(r'^[+-]?(?:\d+\.\d*|\.\d+)$')
+_EMAIL_RE = re.compile(r'^[^@\s]+@[^@\s]+\.[^@\s]+$')
+_DATE_ISO_RE = re.compile(r'^\d{4}-\d{2}-\d{2}$')
+_DATE_SLASH_RE = re.compile(r'^\d{2}/\d{2}/\d{4}$')
+
+def _int_of_length(fake, digits):
+    if digits <= 1:
+        return fake.random_int(min=0, max=9)
+    return fake.random_int(min=10 ** (digits - 1), max=(10 ** digits) - 1)
+
+def draw_pseudonym(fake, value):
+    """Draw one pseudonym whose shape follows the original value.
+
+    Signed integers stay numeric and keep their sign and digit count.
+    Decimals stay numeric and keep their sign, integer digit count, and
+    decimal places. Email shaped values get an email, ISO and day first
+    slash dates get a date in the same format, empty cells stay empty,
+    one or two word strings get a name, and longer text gets text.
+    """
+    if value == "" or value.strip() == "":
+        return value
+    text = value.strip()
+    if _INT_RE.match(text):
+        sign = ""
+        digits_text = text
+        if text[0] in "+-":
+            sign, digits_text = text[0], text[1:]
+        return f"{sign}{_int_of_length(fake, len(digits_text))}"
+    if _FLOAT_RE.match(text):
+        sign = ""
+        body = text
+        if text[0] in "+-":
+            sign, body = text[0], text[1:]
+        int_part, _, frac_part = body.partition(".")
+        int_digits = len(int_part) if int_part else 1
+        places = len(frac_part)
+        drawn_int = _int_of_length(fake, int_digits)
+        if places:
+            drawn_frac = fake.random_int(min=0, max=(10 ** places) - 1)
+            return f"{sign}{drawn_int}.{drawn_frac:0{places}d}"
+        return f"{sign}{drawn_int}."
+    if _EMAIL_RE.match(text):
+        return fake.email()
+    if _DATE_ISO_RE.match(text):
+        try:
+            return fake.date(pattern="%Y-%m-%d")
+        except TypeError:
+            return fake.date()
+    if _DATE_SLASH_RE.match(text):
+        return fake.date_object().strftime("%d/%m/%Y")
+    if len(text.split()) >= 3:
+        try:
+            return fake.text(max_nb_chars=max(10, len(text)))
+        except Exception:
+            return fake.name()
+    return fake.name()
 
 def pseudonymize_column(input_file, output_file, column_name, locale='en_US', seed=None):
     """
@@ -62,19 +121,19 @@ def pseudonymize_column(input_file, output_file, column_name, locale='en_US', se
             writer = csv.writer(outfile)
             writer.writerow(header)
 
+            # One pseudonym per distinct original value. Keeping the mapping
+            # means repeated values that named the same thing in the input
+            # still name the same pseudonym in the output, seeded runs
+            # included, so the column can still be used as a key.
+            mapping = {}
             # Process each row
             for row in rows:
                 # Pseudonymize the specified column
                 try:
                     original_value = row[column_index]
-                    # Attempt to infer the data type and generate a suitable pseudonym
-                    # Basic type inference and generation - can be extended for more types
-                    if original_value.isdigit(): # Integer
-                        row[column_index] = str(fake.random_int())
-                    elif original_value.replace('.', '', 1).isdigit():  # Float
-                        row[column_index] = str(fake.pyfloat())
-                    else: # String
-                        row[column_index] = fake.name() # Default pseudonymization to name
+                    if original_value not in mapping:
+                        mapping[original_value] = draw_pseudonym(fake, original_value)
+                    row[column_index] = mapping[original_value]
                 except IndexError:
                      logging.warning(f"Row is shorter than expected. Skipping pseudonymization for this row.")
                 
