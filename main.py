@@ -27,6 +27,10 @@ _DATE_ISO_RE = re.compile(r'^\d{4}-\d{2}-\d{2}$')
 _DATE_SLASH_RE = re.compile(r'^\d{2}/\d{2}/\d{4}$')
 
 def _int_of_length(fake, digits):
+    # Digit count is preserved, leading zeros are not: a value written
+    # 007 is three digits, so it draws from 100 to 999 and comes back
+    # without the zeros that may have been part of its format, for
+    # example a code rather than a quantity.
     if digits <= 1:
         return fake.random_int(min=0, max=9)
     return fake.random_int(min=10 ** (digits - 1), max=(10 ** digits) - 1)
@@ -70,6 +74,10 @@ def draw_pseudonym(fake, value):
         except TypeError:
             return fake.date()
     if _DATE_SLASH_RE.match(text):
+        # Slash dates are always written back day first. The pattern
+        # cannot tell a day first date from a month first one, so an
+        # input in US month first order gets a pseudonym in the other
+        # order, and nothing in the output says the order changed.
         return fake.date_object().strftime("%d/%m/%Y")
     if len(text.split()) >= 3:
         try:
@@ -99,6 +107,11 @@ def pseudonymize_column(input_file, output_file, column_name, locale='en_US', se
         fake = Faker(locale)
         # seed 0 is a real seed a caller may pass for a reproducible run, so
         # test for None here rather than truthiness.
+        # Faker.seed works on the class, not on this instance, so it
+        # sets the sequence for every Faker in the process. And because
+        # pseudonyms are drawn in the order distinct values first
+        # appear in the file, the same seed over the same values in a
+        # different row order gives a different mapping.
         if seed is not None:
             Faker.seed(seed)
 
