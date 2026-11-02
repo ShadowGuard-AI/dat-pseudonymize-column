@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 360" role="img" aria-label="Sleeping car corridor in three bands: lamps breathing far, the shelf hand at work in the middle, the cat near">
+<rect width="1200" height="360" fill="#171e3c"/>
+<rect x="0" y="0" width="1200" height="120" fill="#232c4e"/>
+<g fill="#e8a33d"><ellipse cx="220" cy="62" rx="90" ry="26"><animate attributeName="opacity" values="0.25;0.55;0.25" dur="9s" repeatCount="indefinite"/></ellipse>
+<ellipse cx="560" cy="58" rx="80" ry="24"><animate attributeName="opacity" values="0.55;0.25;0.55" dur="11s" repeatCount="indefinite"/></ellipse>
+<ellipse cx="900" cy="62" rx="84" ry="25"><animate attributeName="opacity" values="0.3;0.5;0.3" dur="10s" repeatCount="indefinite"/></ellipse></g>
+<rect x="1120" y="18" width="7" height="96" fill="#dfe7f2"/>
+<g><rect x="0" y="120" width="1200" height="120" fill="#2e3a63"/>
+<g fill="#171e3c" stroke="#10131f" stroke-width="3"><rect x="60" y="150" width="150" height="70"/><rect x="260" y="150" width="150" height="70"/><rect x="460" y="150" width="150" height="70"/><rect x="660" y="150" width="150" height="70"/><rect x="860" y="150" width="150" height="70"/></g>
+<g fill="#e8a33d"><path d="M84 196 q10 -14 34 -15 q26 -1 34 10 q3 5 -2 6 l-64 2 q-5 -1 -2 -3"/><path d="M116 196 q10 -14 34 -15 q26 -1 34 10 q3 5 -2 6 l-64 2 q-5 -1 -2 -3"/></g>
+<g><animateTransform attributeName="transform" type="translate" values="0 0; 0 -26; 200 -26; 200 0; 0 0" keyTimes="0;0.2;0.45;0.65;1" dur="18s" repeatCount="indefinite"/>
+<rect x="252" y="118" width="34" height="26" fill="#dfe7f2"/>
+<g fill="#e8a33d"><path d="M284 196 q10 -14 34 -15 q26 -1 34 10 q3 5 -2 6 l-64 2 q-5 -1 -2 -3"/><path d="M316 196 q10 -14 34 -15 q26 -1 34 10 q3 5 -2 6 l-64 2 q-5 -1 -2 -3"/></g></g>
+<g fill="#e8a33d"><path d="M484 196 q10 -14 34 -15 q26 -1 34 10 q3 5 -2 6 l-64 2 q-5 -1 -2 -3"/><path d="M516 196 q10 -14 34 -15 q26 -1 34 10 q3 5 -2 6 l-64 2 q-5 -1 -2 -3"/></g></g>
+<g><rect x="0" y="240" width="1200" height="120" fill="#1d2547"/>
+<g><animateTransform attributeName="transform" type="translate" values="0 0; 0 -3; 0 0" dur="6s" repeatCount="indefinite"/>
+<ellipse cx="330" cy="318" rx="86" ry="26" fill="#464c60"/><ellipse cx="404" cy="306" rx="34" ry="22" fill="#50566a"/>
+<polygon points="392,288 398,268 410,286" fill="#50566a"/><polygon points="412,284 424,268 428,288" fill="#50566a"/>
+<path d="M252 306 q60 -16 108 2" stroke="#10131f" fill="none" stroke-width="3"/></g>
+<g fill="#e8a33d"><path d="M120 322 q10 -14 34 -15 q26 -1 34 10 q3 5 -2 6 l-64 2 q-5 -1 -2 -3"/><path d="M152 322 q10 -14 34 -15 q26 -1 34 10 q3 5 -2 6 l-64 2 q-5 -1 -2 -3"/></g></g>
+</svg>

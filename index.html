@@ -1,164 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Dat Pseudonymize Column: what it is, how it runs, where it stops</title>
-<meta name="description" content="Dat Pseudonymize Column is one of my projects. The README in the repo is short, so this page sticks to what the files themselves show.">
-<style>
-:root {
-  --bg: #0c1016; --panel: #141a24; --ink: #e8ecf0;
-  --mut: #1b2330;
-  --acc: #d8844a; --acc2: #5eb2a8;
-  --line: #141a24;
-}
-* { box-sizing: border-box; }
-body { margin: 0; background: var(--bg); color: var(--ink);
-  font-family: 'Segoe UI', system-ui, sans-serif; line-height: 1.55; }
-code, pre, .mono { font-family: 'Consolas', monospace; }
-a { color: var(--acc2); }
-.hero { padding: 3rem 6vw 1rem; }
-.hero img.banner { width: 100%; height: auto; border: 1px solid var(--line);
-  border-radius: 10px; }
-.logo { width: 92px; height: 92px; border-radius: 18px;
-  border: 1px solid var(--line); }
-h1 { font-size: 2.4rem; margin: 0.4em 0 0.1em; }
-h2 { border-bottom: 2px solid var(--acc); padding-bottom: 0.2em;
-  margin-top: 2em; }
-.lede { font-size: 1.15rem; max-width: 62ch; }
-main { padding: 0 6vw 3rem; max-width: 1180px; margin: 0 auto; }
-.grid { display: grid; gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
-.card { background: var(--panel); border: 1px solid var(--line);
-  border-radius: 12px; padding: 1rem 1.2rem; }
-.card.pop { animation: rise 0.7s ease both; }
-@keyframes rise { from { opacity: 0; transform: translateY(14px); }
-  to { opacity: 1; transform: none; } }
-pre.code { background: #101014; color: #e8e6df; padding: 1rem 1.2rem;
-  border-radius: 12px; overflow-x: auto; font-size: 0.86rem;
-  border-left: 5px solid var(--acc); }
-table { border-collapse: collapse; width: 100%; }
-td, th { border-bottom: 1px solid var(--line); padding: 0.45rem 0.6rem;
-  text-align: left; }
-.shots { display: grid; gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
-.shots img { width: 100%; height: auto; border: 1px solid var(--line);
-  border-radius: 10px; background: #f4f1e8; }
-footer { padding: 2rem 6vw; border-top: 1px solid var(--line);
-  color: var(--mut); }
-.rail { display: flex; gap: 1.2rem; align-items: flex-start; }
-.rail nav { position: sticky; top: 1rem; min-width: 180px; }
-@media (max-width: 760px) { .rail { flex-direction: column; }
-  .rail nav { position: static; } }
-@media (prefers-reduced-motion: reduce) {
-  .card.pop { animation: none; } * { scroll-behavior: auto; } }
-</style>
-</head>
-<body class="layout-rail">
-<!-- This page exists for dat-pseudonymize-column alone: the layout (sidebar-rail),
-     the colors, and the type were picked for this project, not
-     shared with the other project pages. The code block below is
-     copied from the file it names, line for line. If it looks
-     plain, that is because the project is plain, and I would
-     rather the page match the project than dress it up. The one
-     thing I will not do here is oversell: what this project does
-     not do is stated on the page, not hidden from it. -->
-<header class="hero">
-  <img class="logo" src="assets/logo.png" alt="Dat Pseudonymize Column logo">
-  <img class="banner" src="assets/banner.png" alt="">
-  <h1>Dat Pseudonymize Column</h1>
-  <p class="mono"><a href="https://github.com/ShadowGuard-AI/dat-pseudonymize-column">github.com/ShadowGuard-AI/dat-pseudonymize-column</a></p>
-</header>
+<!doctype html><html lang="en-GB"><head><meta charset="utf-8"><title>dat-pseudonymize-column: The Sleeping Car&#x27;s Slipper Shelf</title>
+<style>@font-face{font-family:Disp;src:url("fonts/BowlbyOneSC.ttf")}@font-face{font-family:Text;src:url("fonts/Barlow.ttf")}
+body{background:#171e3c;font-family:Text,sans-serif;color:#dfe7f2;margin:0}main{max-width:920px;margin:0 auto;padding:28px}
+h1,h2,h3{font-family:Disp,serif;color:#e8a33d}section{background:#232c4e;padding:18px 22px;margin:16px 0;border-top:3px solid #10131f}
+img{max-width:100%}button{background:#232c4e;color:#e8a33d;border:2px solid #10131f;padding:14px 20px;margin:4px;font-family:Disp,serif}
+pre{white-space:pre-wrap;font-family:Text,sans-serif}</style></head><body><main>
+<img src="intro-banner.png" alt="Introduction banner: the sleeping car corridor before any name is spoken">
+<h1>dat-pseudonymize-column: The Sleeping Car&#x27;s Slipper Shelf</h1>
+<img src="logo.png" alt="Logo"><img src="banner.png" alt="Wordmark banner">
+<img src="scene.svg" alt="Animated scene">
+<div><button type="button">Swap the Column</button><button type="button">Set the Seed</button><button type="button">Read the Night Log</button></div>
+<h3>One Column Only</h3><h3>Shape Chooses the Swap</h3><h3>Repeats Still Match</h3><h3>Zero Is a Real Seed</h3><h3>Zeros Are Not Kept</h3>
+<section><h2>First plate: the job</h2><p>The program reads one CSV file. It rewrites one named column. Each value in that column is swapped for a Faker pseudonym chosen by the shape of the value. All other columns pass through untouched. Row order stays. The header row stays.</p></section>
+<section><h2>Second plate: shape chooses the swap</h2><p>A blank cell stays blank. A signed whole number stays a whole number with the same sign and the same count of digits. A decimal stays decimal with the same sign, the same count of digits before the point, and the same count of places after it. A value shaped like an email address gets a fresh email address. A date written year first with dashes gets a date in that same layout. A date written day first with slashes gets a date in that same layout. A string of one or two words gets a personal name. A string of three words or more gets a block of generated text. Any value that fits no class above also gets a personal name. That fallback is stated here at full size.</p></section>
+<section><h2>Third plate: repeats still match</h2><p>Each distinct original value draws one pseudonym. That same pseudonym serves every later row holding the same original. Repeats still match each other in the output. The column can still serve as a join key. This holds with a seed and without one.</p></section>
+<section><h2>Fourth plate: the needs</h2><p>Python 3 is required. So is Faker, at 20.1.0 or later. The requirements file names it. The hard edge stands beside it: the Faker import sits at the top of main.py, and without Faker, even a request for help stops at that import.</p></section>
+<section><h2>Fifth plate: the working form</h2><p>python3 main.py INPUT.csv OUTPUT.csv COLUMN, with placeholders only. Beside the form, the README fault stands plainly: the README usage line shows a bare program name with a params placeholder. It names no interpreter, no script, and none of the three required positionals. The form on this plate is the true one, taken from the code.</p></section>
+<section><h2>Sixth plate: controls in parser order</h2><p>Input file comes first. It is positional and required. Output file comes next. It is positional and required. Column name comes next. It is positional and required. Locale follows. Its flag is --locale. Default is en_US. Seed closes the list. Its flag is --seed. It takes an integer. It has no default. Help is --help, printed by the parser as -h in the README list.</p></section>
+<section><h2>Seventh plate: the seed berth</h2><p>A seed makes the draws repeatable. Seed zero is a real seed, not an absence. The code tests for None, so zero works. Two cautions sit beside it. Seeding is set on the Faker class, so it sets the sequence for every Faker in the process. Draws follow the order in which distinct values first appear. The same seed over the same values in a different row order gives a different mapping.</p></section>
+<section><h2>Eighth plate: shape losses</h2><p>Leading zeros are not kept. A three digit value written with leading zeros draws a plain three digit number, and the zeros are gone. A code can come back looking like a quantity. Slash dates are always written back day first. A month first value in that layout comes back day first, and nothing in the output marks the swap. Generated text is drawn at least ten characters long, or the length of the original when that is longer.</p></section>
+<section><h2>Ninth plate: refusals and exits</h2><p>The header is read and the column is checked before the output file is opened. A missing column raises an error and the run exits 1. No output file is left behind by that failure. An empty input, with no header row, also fails and exits 1. A missing input file exits 1. A short row draws a warning, keeps its place, and is written without a swap for that cell. A clean run prints a completion line and exits 0.</p></section>
+<section><h2>Last plate: licence</h2><p>The LICENSE file in the repo carries the MIT License. Its holder line pairs a pen name with one initial for the rest of the name. That initial is left unexpanded.</p></section>
+<section><h2>Gathered notes</h2><p>The buttons of this re-skin read Swap the Column, Set the Seed, and Read the Night Log. Its headings read One Column Only, Shape Chooses the Swap, Repeats Still Match, Zero Is a Real Seed, and Zeros Are Not Kept. The working form is python3 main.py, then the input CSV path, then the output CSV path, then the column name, with --locale (default en_US) and --seed (an integer, no default) after them. Python 3 and Faker at 20.1.0 or later are required, and the Faker import sits at the top of main.py, so without Faker even a request for help stops at that import. A missing column, an empty input, and a missing input file each end the run at exit 1, a short row is written without a swap for that cell, and a clean run exits 0. Seed zero is a real seed. Leading zeros are not kept. The repository LICENSE file carries the MIT License; its holder line pairs a pen name with one initial for the rest of the name, and that initial is left unexpanded here.</p></section>
+<section><h2>Defects account</h2><p>Defects account. The README licence words name an organisation that is not this one, and they are printed as they stand only here and in the preserved record below: Copyright (c) ShadowStrikeHQ. The install line in the preserved record names that same other organisation; neither line is silently fixed. The theme entry also carried faults this re-skin corrects: a false fit claim about sealing and unsealing with keys, where this program uses no key and seals nothing; impossible motions, a slipper made to blink, cats set bobbing down a lane, moon phases going out, star blankets waxing; a borrowed step, the slipper stepping forward; and a kit border of whole sleeping cats used as trim. The README parameter list omits the three required positionals, and the code limits in the plates above are the ones the README understates.</p></section>
+<section><h2>Preserved record</h2><pre># dat-Pseudonymize-Column
+Replaces values in a specified column of a CSV file with pseudonyms drawn with the Faker library, routed by the shape of each value. Signed integers stay numeric, keeping the sign and the digit count. Decimals stay numeric, keeping the sign, the integer digit count, and the number of decimal places. Email shaped values are replaced with an email, dates in YYYY-MM-DD form or DD/MM/YYYY form are replaced with a date in the same form, one or two word strings are replaced with a name, and longer text is replaced with text. Empty cells stay empty. Each distinct original value gets one pseudonym: the first value drawn for it is reused for every later row with the same original, so repeated values still match each other in the output and the column can still be used as a key. A --seed makes the draws reproducible, and the mapping holds within a seeded run as well. Other shapes are not preserved as their own kind: a value that matches none of the classes above is replaced with a name.
 
-<main>
-  <section class="rail">
-    <nav aria-label="on this page">
-      <p class="mono"><a href="#run">Run it</a><br>
-      <a href="#files">The files</a><br>
-      <a href="#sheets">The sheets</a><br>
-      <a href="https://github.com/ShadowGuard-AI/dat-pseudonymize-column">The repo</a></p>
-    </nav>
-    <div>
-      <p class="lede">Dat Pseudonymize Column is one of my projects. The README in the repo is short, so this page sticks to what the files themselves show.</p>
-      <div class="grid">
-        <div class="card pop"><h3>What it is</h3>
-          <p>Dat Pseudonymize Column: 3 files, 135 counted
-          lines across Python 118, Markdown 16, Text 1. One job, done in the
-          open, in files you can read.</p></div>
-        <div class="card pop"><h3>The biggest piece</h3>
-          <p><code>main.py</code> carries the most
-          lines. If the project grows, that file is where the growth
-          lands first, for better or worse.</p></div>
-        <div class="card pop"><h3>The honest gap</h3>
-          <p>No test files yet. That is the honest gap, and the roadmap in the visuals folder says what the first one should cover.</p></div>
-      </div>
-      <section id="run">
-        <h2>Run it</h2>
-        <p>The repo README has the exact commands for this one. The
-        shape is the shape for most of my projects: clone it, read the
-        top file first so you know what will happen, then run it on
-        something you do not mind breaking.</p>
-        <p class="mono">$ git clone https://github.com/ShadowGuard-AI/dat-pseudonymize-column.git<br>$ cd dat-pseudonymize-column</p>
-      </section>
-      
-  <section aria-label="real code">
-    <h2>The code, as it sits in the repo</h2>
-    <p>From <code>main.py</code>, line 8 on. I did
-    not tidy it for the page. What you see is what the file has.</p>
-    <pre class="code"><code>logging.basicConfig(level=logging.INFO, format=&#x27;%(asctime)s - %(levelname)s - %(message)s&#x27;)
+## Install
+`git clone https://github.com/ShadowStrikeHQ/dat-pseudonymize-column`
 
-def setup_argparse():
-    &quot;&quot;&quot;
-    Sets up the argument parser for the command-line interface.
-    &quot;&quot;&quot;
-    parser = argparse.ArgumentParser(description=&#x27;Pseudonymize a column in a CSV file using Faker.&#x27;)
-    parser.add_argument(&#x27;input_file&#x27;, help=&#x27;Path to the input CSV file.&#x27;)
-    parser.add_argument(&#x27;output_file&#x27;, help=&#x27;Path to the output CSV file.&#x27;)
-    parser.add_argument(&#x27;column_name&#x27;, help=&#x27;Name of the column to pseudonymize.&#x27;)
-    parser.add_argument(&#x27;--locale&#x27;, default=&#x27;en_US&#x27;, help=&#x27;Locale for Faker (default: en_US).&#x27;)
-    parser.add_argument(&#x27;--seed&#x27;, type=int, help=&#x27;Seed for Faker\&#x27;s random number generator for reproducibility.&#x27;)
-    return parser
+## Usage
+`./dat-pseudonymize-column [params]`
 
-def pseudonymize_column(input_file, output_file, column_name, locale=&#x27;en_US&#x27;, seed=None):
-    &quot;&quot;&quot;
-    Replaces values in a specified column of a CSV file with pseudonyms.
+## Parameters
+- `-h`: Show help message and exit
+- `--locale`: Locale for Faker (default: en_US).
+- `--seed`: Seed for Faker&#x27;s random number generator for reproducibility. Repeated original values receive the same pseudonym within a run, with or without a seed.
 
-    Args:
-        input_file (str): Path to the input CSV file.
-        output_file (str): Path to the output CSV file.
-        column_name (str): Name of the column to pseudonymize.</code></pre>
-  </section>
-      <section id="files">
-        <h2>The files that matter</h2>
-        <table><tr><th>File</th><th>Lines</th></tr>
-        <tr><td><code>main.py</code></td><td>118</td></tr>
-        <tr><td><code>README.md</code></td><td>16</td></tr>
-        <tr><td><code>requirements.txt</code></td><td>1</td></tr>
-        </table>
-        <p>Names doing the work: <span class="mono">setup_argparse, pseudonymize_column, main</span>.</p>
-      </section>
-      <section id="sheets">
-        <h2>Drawn by hand</h2>
-        <p>I sketch my projects on notebook paper so I have to
-        understand them well enough to draw them. The full set,
-        with the counts and how they were counted, is the
-        <a href="https://github.com/ShadowGuard-AI/dat-pseudonymize-column/tree/main/dat-pseudonymize-column-Visuals">dat-pseudonymize-column-Visuals</a>
-        folder in the repo. Nothing is drawn over the binder holes.
-        That is a rule, not a style.</p>
-        <div class="shots">
-          <img src="assets/architecture.png" alt="Hand drawn architecture sheet for Dat Pseudonymize Column">
-          <img src="assets/flowchart.png" alt="Hand drawn flowchart sheet for Dat Pseudonymize Column">
-          <img src="assets/product-map.png" alt="Hand drawn product map sheet for Dat Pseudonymize Column">
-        </div>
-      </section>
-    </div>
-  </section>
-</main>
-<footer>
-  <p>Dat Pseudonymize Column is one of my projects. This page was written
-  from the repo itself on 2026-10-30: the counts are the
-  repo's counts, the code is the repo's code, and the gaps are the
-  repo's gaps.</p>
-</footer>
-</body>
-</html>
+## License
+Copyright (c) ShadowStrikeHQ</pre></section>
+</main></body></html>
